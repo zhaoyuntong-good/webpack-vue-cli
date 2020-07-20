@@ -2,12 +2,12 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const vueLoaderPlugin = require('vue-loader/lib/plugin');
-const Webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HappyPack = require('happypack');
 const os = require('os');
 const HappyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 const devMode = process.argv.indexOf('--mode=production') === -1;
+process.traceDeprecation = true;
 module.exports = {
 	entry: {
 		main: ["@babel/polyfill",path.resolve(__dirname,'../src/main.js')]
