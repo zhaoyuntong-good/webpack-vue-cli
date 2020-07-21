@@ -29,9 +29,15 @@ module.exports = {
 			{
 				test: /\.js$/,
 				use: [{
-					loader: 'happypack/loader?id=happyBabelJS'
-				}],
-				exclude: /node_moudels/
+	  			loader: 'babel-loader',
+					options: {
+						presets: ['@babel/preset-env', 'es2015'],
+						cacheDirectory: true,
+						include: [path.resolve(__dirname, '../src')],
+					},
+					
+	  		}],
+				// exclude: /node_moudels/
 			},
 			{
 				test: /\.vue$/,
@@ -39,10 +45,6 @@ module.exports = {
 				include: [path.resolve(__dirname, '../src')],
 				exclude: /node_moudels/
 			},
-			// {
-   //      test: /\.html$/,
-   //      use: 'vue-html-loader'
-   //    },
 			{
 				test: /\.(jpe?g|png|gif)$/i,
 				use: [
@@ -50,10 +52,12 @@ module.exports = {
 						loader: 'url-loader',
 						options: {
 							limit: 10240,
+							esModule: false,
 							fallback: {
 								loader: 'file-loader',
 								options: {
-									name: 'imgs/[name].[hash:8].[ext]'
+									name: 'img/[name].[hash:8].[ext]'
+									
 								}
 							},
 							include: [path.resolve(__dirname, '../src/assets/imgs')],
@@ -112,19 +116,19 @@ module.exports = {
 		extensions:['*','.js','.json','.vue']
 	},
 	plugins: [
-	  new HappyPack({
-	  	id: 'happyBabelJS',
-	  	loaders: [
-	  		{
-	  			loader: 'babel-loader',
-					options: {
-						presets: ['@babel/preset-env'],
-						cacheDirectory: true
-					}
-	  		}
-	  	],
-	  	threadPool: HappyThreadPool
-	  }),
+	  // new HappyPack({
+	  // 	id: 'happyBabelJS',
+	  // 	loaders: [
+	  // 		{
+	  // 			loader: 'babel-loader',
+		// 			options: {
+		// 				presets: ['@babel/preset-env', 'es2015'],
+		// 				cacheDirectory: true
+		// 			}
+	  // 		}
+	  // 	],
+	  // 	threadPool: HappyThreadPool
+	  // }),
 		new vueLoaderPlugin(),
 		new MiniCssExtractPlugin({
 			filename: devMode ? '[name].css' : '[name].[hash].css',

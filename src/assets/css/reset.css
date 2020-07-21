@@ -1,0 +1,23 @@
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  box-sizing: border-box;
+}
+*{
+  font-size: 14px;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+}
+/*去掉a标签点击效果*/
+a,a:hover,a:active,a:visited,a:link,a:focus{
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;
+  outline:none;
+  background: none;
+  text-decoration: none;
+}
+/* 去除IE输入框的X标记 */
+input[type=text]::-ms-clear { display: none; }
+/* 去除IE输入框的小眼睛标记 */
+input[type=password]::-ms-reveal { display: none; }
