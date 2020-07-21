@@ -1,13 +1,10 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const vueLoaderPlugin = require('vue-loader/lib/plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HappyPack = require('happypack');
 const os = require('os');
 const HappyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 const devMode = process.argv.indexOf('--mode=production') === -1;
-process.traceDeprecation = true;
 module.exports = {
 	entry: {
 		main: ["@babel/polyfill",path.resolve(__dirname,'../src/main.js')]
@@ -15,35 +12,7 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.vue$/,
-				use: ['vue-loader'],
-				include: [path.resolve(__dirname, '../src')],
-				exclude: /node_moudels/
-			},
-			{
-				test: /\.js$/,
-				use: [{
-					loader: 'happypack/loader?id=happyBabelJS'
-				}],
-				exclude: /node_moudels/
-			},
-			{
-				test: /\.css$/,
-				use: [{
-					loader: devMode ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
-					options:{
-            publicPath: "../dist/css/",
-            hmr: devMode
-          }
-				}, 'css-loader', {
-					loader: 'postcss-loader',
-					options:{
-            plugins:[require('autoprefixer')]
-          }
-				}]
-			},
-			{
-				test: /\.less$/,
+				test: /\.(css|less)$/,
 				use: [{
 					loader: devMode ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
 					options:{
@@ -58,6 +27,23 @@ module.exports = {
 				}, 'less-loader']
 			},
 			{
+				test: /\.js$/,
+				use: [{
+					loader: 'happypack/loader?id=happyBabelJS'
+				}],
+				exclude: /node_moudels/
+			},
+			{
+				test: /\.vue$/,
+				use: ['vue-loader'],
+				include: [path.resolve(__dirname, '../src')],
+				exclude: /node_moudels/
+			},
+			// {
+   //      test: /\.html$/,
+   //      use: 'vue-html-loader'
+   //    },
+			{
 				test: /\.(jpe?g|png|gif)$/i,
 				use: [
 					{
@@ -67,7 +53,7 @@ module.exports = {
 							fallback: {
 								loader: 'file-loader',
 								options: {
-									name: 'img/[name].[hash:8].[ext]'
+									name: 'imgs/[name].[hash:8].[ext]'
 								}
 							},
 							include: [path.resolve(__dirname, '../src/assets/imgs')],
@@ -139,11 +125,7 @@ module.exports = {
 	  	],
 	  	threadPool: HappyThreadPool
 	  }),
-		new CleanWebpackPlugin(),
 		new vueLoaderPlugin(),
-		new HtmlWebpackPlugin({
-			template: path.resolve(__dirname, '../public/index.html')
-		}),
 		new MiniCssExtractPlugin({
 			filename: devMode ? '[name].css' : '[name].[hash].css',
 			chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
