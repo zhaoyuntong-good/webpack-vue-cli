@@ -13,7 +13,7 @@
             <el-menu-item 
               v-for="childItem in item.children" 
               :key="childItem.path" 
-              :index="item.path + childItem.path">
+              :index="item.path + '/' + childItem.path">
               {{childItem.meta.title}}
             </el-menu-item>
           </el-menu-item-group>

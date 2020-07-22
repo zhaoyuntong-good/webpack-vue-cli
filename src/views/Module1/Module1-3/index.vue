@@ -1,6 +1,6 @@
 <template>
   <div class="index">
-    <div class="height">3</div>
+    <div class="height">子模块3</div>
   </div>
 </template>
 

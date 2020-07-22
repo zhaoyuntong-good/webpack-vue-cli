@@ -1,6 +1,8 @@
 <template>
   <div class="layout">
-    <div class="top-bar"></div>
+    <div class="top-bar">
+      <div class="logout" @click="logout()">退出</div>
+    </div>
     <div class="slider-bar">
       <slider-bar :menuData="asyncRoutes"></slider-bar>
     </div>
@@ -11,6 +13,7 @@
 <script>
   import { mapState } from 'vuex';
   import SliderBar from '@/components/SliderBar'
+  import { removeToken } from '@/utils/saveToLocal.js';
   export default {
     name: 'Layout',
     components: {
@@ -25,7 +28,12 @@
     created(){
     },
     methods: {
-      
+      logout(){
+        removeToken();
+        this.$router.push({
+          path: '/'
+        })
+      }
     }
   }
 </script>
@@ -44,6 +52,13 @@
     top: 0;
     z-index: 0;
     background-color: #2a5b96;
+  }
+  .logout {
+    float: right;
+    line-height: 40px;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 30px;
   }
   .slider-bar {
     width: 200px;

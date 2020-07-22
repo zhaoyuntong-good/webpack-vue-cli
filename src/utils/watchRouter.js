@@ -11,13 +11,10 @@ router.beforeEach((to, from, next) => {
   		} else {
   			import('@/router/asyncRoutes.js').then( res => {
   				store.commit('setAsyncRoutes', res.default);
-  				const asyncRoutes = handleRoutes(res.default);
-  				console.log(asyncRoutes)
-  				router.addRoutes(asyncRoutes);
-  				store.commit('setHandledRoutes');
-  				console.log(router)
-        }).then(() => {
-        	next();
+					const asyncRoutes = handleRoutes(res.default);
+					router.addRoutes(asyncRoutes);
+					store.commit('setHandledRoutes');
+					next({ ...to, replace: true });
         })
   		}
   	} else {
@@ -37,7 +34,7 @@ const handleRoutes = (asyncRoutes) => {
 			route = {
 				path: cur.path,
 				meta: cur.meta,
-				component: () => import(cur.component),
+				component: () => import(`@/views${cur.component}`),
 				children: handleRoutes(cur.children)
 			}
 		} else {
@@ -45,10 +42,10 @@ const handleRoutes = (asyncRoutes) => {
 				path: cur.path,
 				name: cur.name,
 				meta: cur.meta,
-				component: () => import(cur.component)
+				component: () => import(`@/views${cur.component}`)
 			}
 		}
 		pre.push(route)
 		return pre;
-	}, [])
+	}, []);
 }

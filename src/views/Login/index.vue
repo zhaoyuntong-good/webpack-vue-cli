@@ -13,7 +13,6 @@
 </template>
 
 <script>
-  import { mapMutations } from 'vuex';
   import { setToken, removeToken } from '@/utils/saveToLocal.js';
   export default {
     name: 'Login',
@@ -55,15 +54,10 @@
       removeToken();
     },
     methods: {
-      ...mapMutations([
-        'setAsyncRoutes'
-      ]),
       // 登录
       login(){
         import('@/router/asyncRoutes.js').then( res => {
-          this.setAsyncRoutes(res.default);
           setToken('1234567');
-        }).then( res => {
           this.$router.push({
             path: '/index'
           })
