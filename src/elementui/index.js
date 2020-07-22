@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import 'element-ui/lib/theme-chalk/index.css';
-
+import '@/assets/css/selElementui.css';
 import {
   Icon,
   Button,
@@ -25,6 +25,7 @@ import {
   RadioGroup,
   Tree,
   Upload,
+  Scrollbar
 } from 'element-ui';
 Vue.use(Icon);
 Vue.use(Button);
@@ -47,6 +48,7 @@ Vue.use(Radio);
 Vue.use(RadioGroup);
 Vue.use(Tree);
 Vue.use(Upload);
+Vue.use(Scrollbar);
 
 // 封装全局loading
 let loading = null;

@@ -19,7 +19,7 @@ module.exports = merge(webpackConfig, {
 			filename: 'index.html',
 			template: path.resolve(__dirname, '../public/index.html'),
 			templateParameters: {
-				BASE_URL: './'
+				BASE_URL: '/'
 			}
 		}),
 	]

@@ -1,43 +1,28 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-const Layout = () => import('@/views/Layout');
-
-Vue.use(VueRouter)
-const staticRoutes = [
-  {
-    path: '/',
-    name: 'Login',
-    meta: {
-    	check: false
-    },
-    component: () => import('@/views/Login')
-  }
-]
 const asyncRoutes = [
 	{
 		path: '/index',
-		component: Layout,
 		meta: {
 			check: true,
 			icon: 'el-icon-menu',
 			title: '首页'
 		},
+		component: '@/views/Layout',
 		children: [
 			{
-				path: '',
+				path: '/',
 				name: 'Index',
 				meta: {
 					check: true,
 					icon: '',
 					title: '首页'
 				},
-				component: () => import('@/views/Index')
+				component: '@/views/Index'
 			}
 		]
 	},
 	{
 		path: '/module1',
-		component: Layout,
+		component: '@/views/Layout',
 		redirect: '/module1/module1-1',
 		meta: {
 			check: true,
@@ -46,34 +31,34 @@ const asyncRoutes = [
 		},
 		children: [
 			{
-				path: 'module1-1',
+				path: '/module1-1',
 				name: 'Module1-1',
 				meta: {
 					check: true,
 					icon: '',
 					title: '子模块1'
 				},
-				component: () => import('@/views/Module1/Module1-1')
+				component: '@/views/Module1/Module1-1'
 			},
 			{
-				path: 'module1-2',
+				path: '/module1-2',
 				name: 'Module1-2',
 				meta: {
 					check: true,
 					icon: '',
 					title: '子模块2'
 				},
-				component: () => import('@/views/Module1/Module1-2')
+				component: '@/views/Module1/Module1-2'
 			},
 			{
-				path: 'module1-3',
+				path: '/module1-3',
 				name: 'Module1-3',
 				meta: {
 					check: true,
 					icon: '',
 					title: '子模块3'
 				},
-				component: () => import('@/views/Module1/Module1-3')
+				component: '@/views/Module1/Module1-3'
 			}
 		]
 	},
@@ -84,17 +69,17 @@ const asyncRoutes = [
 			icon: 'el-icon-document',
 			title: '模块二'
 		},
-		component: Layout,
+		component: '@/views/Layout',
 		children: [
 			{
-				path: '',
+				path: '/',
 				name: 'Module2',
 				meta: {
 					check: true,
 					icon: '',
 					title: '模块二'
 				},
-				component: () => import('@/views/Module2')
+				component: '@/views/Module2'
 			}
 		]
 	},
@@ -105,24 +90,20 @@ const asyncRoutes = [
 			icon: 'el-icon-setting',
 			title: '模块三'
 		},
-		component: Layout,
+		component: '@/views/Layout',
 		children: [
 			{
-				path: '',
+				path: '/',
 				name: 'Module3',
 				meta: {
 					check: true,
 					icon: '',
 					title: '模块三'
 				},
-				component: () => import('@/views/Module3')
+				component: '@/views/Module3'
 			}
 		]
 	}
 ]
-const routes = [...staticRoutes];
-const router = new VueRouter({
-  routes
-})
 
-export default router
+export default asyncRoutes;

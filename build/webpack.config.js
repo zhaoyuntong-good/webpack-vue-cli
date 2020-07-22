@@ -28,16 +28,9 @@ module.exports = {
 			},
 			{
 				test: /\.js$/,
-				use: [{
-	  			loader: 'babel-loader',
-					options: {
-						presets: ['@babel/preset-env', 'es2015'],
-						cacheDirectory: true,
-						include: [path.resolve(__dirname, '../src')],
-					},
-					
-	  		}],
-				// exclude: /node_moudels/
+				loader: 'happypack/loader?id=happyBabelJS',
+				include: [path.resolve(__dirname, '../src')],
+				exclude: /node_moudels/
 			},
 			{
 				test: /\.vue$/,
@@ -116,19 +109,19 @@ module.exports = {
 		extensions:['*','.js','.json','.vue']
 	},
 	plugins: [
-	  // new HappyPack({
-	  // 	id: 'happyBabelJS',
-	  // 	loaders: [
-	  // 		{
-	  // 			loader: 'babel-loader',
-		// 			options: {
-		// 				presets: ['@babel/preset-env', 'es2015'],
-		// 				cacheDirectory: true
-		// 			}
-	  // 		}
-	  // 	],
-	  // 	threadPool: HappyThreadPool
-	  // }),
+	  new HappyPack({
+	  	id: 'happyBabelJS',
+	  	loaders: [
+	  		{
+	  			loader: 'babel-loader',
+					options: {
+						presets: [['@babel/preset-env', {useBuiltIns: 'usage'}]],
+						cacheDirectory: true,
+					}
+	  		}
+	  	],
+	  	threadPool: HappyThreadPool
+	  }),
 		new vueLoaderPlugin(),
 		new MiniCssExtractPlugin({
 			filename: devMode ? '[name].css' : '[name].[hash].css',

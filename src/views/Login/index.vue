@@ -7,54 +7,70 @@
       <el-form-item label="密码：" prop="passWord">
         <el-input type="password" v-model="loginForm.passWord"></el-input>
       </el-form-item>
-      <el-button type="primary">登录</el-button>
+      <el-button type="primary" @click="login()">登录</el-button>
     </el-form>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'Login',
-  data(){
-  	return {
-      loginForm: {
-        userName: '',
-        passWord: '',
-      },
-      loginRules: {
-        userName: [
-          { 
-            validator: (rule, value, callback) => {
-              if (value === '') {
-                callback(new Error('请输入账号'));
-              } else {
-                callback();
-              }
-            },
-            trigger: 'blur' 
-          }
-        ],
-        passWord: [
-          { 
-            validator: (rule, value, callback) => {
-              if (value === '') {
-                callback(new Error('请输入密码'));
-              } else {
-                callback();
-              }
-            },
-            trigger: 'blur' 
-          }
-        ]
+  import { mapMutations } from 'vuex';
+  import { setToken, removeToken } from '@/utils/saveToLocal.js';
+  export default {
+    name: 'Login',
+    data(){
+    	return {
+        loginForm: {
+          userName: '',
+          passWord: '',
+        },
+        loginRules: {
+          userName: [
+            { 
+              validator: (rule, value, callback) => {
+                if (value === '') {
+                  callback(new Error('请输入账号'));
+                } else {
+                  callback();
+                }
+              },
+              trigger: 'blur' 
+            }
+          ],
+          passWord: [
+            { 
+              validator: (rule, value, callback) => {
+                if (value === '') {
+                  callback(new Error('请输入密码'));
+                } else {
+                  callback();
+                }
+              },
+              trigger: 'blur' 
+            }
+          ]
+        }
+      }
+    },
+    created(){
+      removeToken();
+    },
+    methods: {
+      ...mapMutations([
+        'setAsyncRoutes'
+      ]),
+      // 登录
+      login(){
+        import('@/router/asyncRoutes.js').then( res => {
+          this.setAsyncRoutes(res.default);
+          setToken('1234567');
+        }).then( res => {
+          this.$router.push({
+            path: '/index'
+          })
+        })
       }
     }
-  },
-  created(){
-  },
-  methods: {
-    
   }
-}
 </script>
 
 <style scoped>
