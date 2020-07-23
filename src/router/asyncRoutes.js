@@ -2,7 +2,6 @@ const asyncRoutes = [
 	{
 		path: '/index',
 		meta: {
-			check: true,
 			icon: 'el-icon-menu',
 			title: '首页'
 		},
@@ -12,7 +11,6 @@ const asyncRoutes = [
 				path: '',
 				name: 'Index',
 				meta: {
-					check: true,
 					icon: '',
 					title: '首页'
 				},
@@ -24,7 +22,6 @@ const asyncRoutes = [
 		path: '/module1',
 		component: '/Layout',
 		meta: {
-			check: true,
 			icon: 'el-icon-location',
 			title: '模块一'
 		},
@@ -33,7 +30,6 @@ const asyncRoutes = [
 				path: 'module1-1',
 				name: 'Module1-1',
 				meta: {
-					check: true,
 					icon: '',
 					title: '子模块1'
 				},
@@ -43,7 +39,6 @@ const asyncRoutes = [
 				path: 'module1-2',
 				name: 'Module1-2',
 				meta: {
-					check: true,
 					icon: '',
 					title: '子模块2'
 				},
@@ -53,7 +48,6 @@ const asyncRoutes = [
 				path: 'module1-3',
 				name: 'Module1-3',
 				meta: {
-					check: true,
 					icon: '',
 					title: '子模块3'
 				},
@@ -64,7 +58,6 @@ const asyncRoutes = [
 	{
 		path: '/module2',
 		meta: {
-			check: true,
 			icon: 'el-icon-document',
 			title: '模块二'
 		},
@@ -74,7 +67,6 @@ const asyncRoutes = [
 				path: '',
 				name: 'Module2',
 				meta: {
-					check: true,
 					icon: '',
 					title: '模块二'
 				},
@@ -85,7 +77,6 @@ const asyncRoutes = [
 	{
 		path: '/module3',
 		meta: {
-			check: true,
 			icon: 'el-icon-setting',
 			title: '模块三'
 		},
@@ -95,7 +86,6 @@ const asyncRoutes = [
 				path: '',
 				name: 'Module3',
 				meta: {
-					check: true,
 					icon: '',
 					title: '模块三'
 				},

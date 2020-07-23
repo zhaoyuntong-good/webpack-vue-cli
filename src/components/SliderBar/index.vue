@@ -9,14 +9,12 @@
             <i :class="item.meta.icon"></i>
             <span>{{item.meta.title}}</span>
           </template>
-          <el-menu-item-group>
-            <el-menu-item 
-              v-for="childItem in item.children" 
-              :key="childItem.path" 
-              :index="item.path + '/' + childItem.path">
-              {{childItem.meta.title}}
-            </el-menu-item>
-          </el-menu-item-group>
+          <el-menu-item 
+            v-for="childItem in item.children" 
+            :key="childItem.path" 
+            :index="item.path + '/' + childItem.path">
+            {{childItem.meta.title}}
+          </el-menu-item>
         </el-submenu>
         <el-menu-item v-else :index="item.path">
           <i :class="item.meta.icon"></i>

@@ -13,7 +13,9 @@
 </template>
 
 <script>
-  import { setToken, removeToken } from '@/utils/saveToLocal.js';
+  import { mapMutations } from 'vuex';
+  import { setToken, getToken } from '@/utils/saveToLocal.js';
+  import { login } from '@/api/login.js';
   export default {
     name: 'Login',
     data(){
@@ -51,15 +53,26 @@
       }
     },
     created(){
-      removeToken();
+      if (getToken()) {
+        this.$router.push({
+          path: '/'
+        })
+      }
     },
     methods: {
+      ...mapMutations(['setAsyncRoutes', 'setHandledRoutes']),
       // 登录
-      login(){
+      async login(){
+        // const { data } = await login({
+        //   opId: "3000",
+        //   password: "NjY2NjY2"
+        // });
+        // console.log(data)
         import('@/router/asyncRoutes.js').then( res => {
+          this.setAsyncRoutes(res.default);
           setToken('1234567');
           this.$router.push({
-            path: '/index'
+            path: '/'
           })
         })
       }

@@ -31,7 +31,7 @@
       logout(){
         removeToken();
         this.$router.push({
-          path: '/'
+          path: '/login'
         })
       }
     }

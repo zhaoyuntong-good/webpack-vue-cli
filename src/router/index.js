@@ -5,12 +5,14 @@ const Layout = () => import('@/views/Layout');
 Vue.use(VueRouter)
 const staticRoutes = [
   {
-    path: '/',
+    path: '/login',
     name: 'Login',
-    meta: {
-    	check: false
-    },
     component: () => import('@/views/Login')
+  },
+  {
+  	path: '/',
+  	name: 'Redirect',
+  	component: () => import('@/views/Redirect')
   }
 ]
 const asyncRoutes = [
@@ -18,7 +20,6 @@ const asyncRoutes = [
 		path: '/index',
 		component: Layout,
 		meta: {
-			check: true,
 			icon: 'el-icon-menu',
 			title: '首页'
 		},
@@ -27,7 +28,6 @@ const asyncRoutes = [
 				path: '',
 				name: 'Index',
 				meta: {
-					check: true,
 					icon: '',
 					title: '首页'
 				},
@@ -40,7 +40,6 @@ const asyncRoutes = [
 		component: Layout,
 		redirect: '/module1/module1-1',
 		meta: {
-			check: true,
 			icon: 'el-icon-location',
 			title: '模块一'
 		},
@@ -49,7 +48,6 @@ const asyncRoutes = [
 				path: 'module1-1',
 				name: 'Module1-1',
 				meta: {
-					check: true,
 					icon: '',
 					title: '子模块1'
 				},
@@ -59,7 +57,6 @@ const asyncRoutes = [
 				path: 'module1-2',
 				name: 'Module1-2',
 				meta: {
-					check: true,
 					icon: '',
 					title: '子模块2'
 				},
@@ -69,7 +66,6 @@ const asyncRoutes = [
 				path: 'module1-3',
 				name: 'Module1-3',
 				meta: {
-					check: true,
 					icon: '',
 					title: '子模块3'
 				},
@@ -80,7 +76,6 @@ const asyncRoutes = [
 	{
 		path: '/module2',
 		meta: {
-			check: true,
 			icon: 'el-icon-document',
 			title: '模块二'
 		},
@@ -90,7 +85,6 @@ const asyncRoutes = [
 				path: '',
 				name: 'Module2',
 				meta: {
-					check: true,
 					icon: '',
 					title: '模块二'
 				},
@@ -101,7 +95,6 @@ const asyncRoutes = [
 	{
 		path: '/module3',
 		meta: {
-			check: true,
 			icon: 'el-icon-setting',
 			title: '模块三'
 		},
@@ -111,7 +104,6 @@ const asyncRoutes = [
 				path: '',
 				name: 'Module3',
 				meta: {
-					check: true,
 					icon: '',
 					title: '模块三'
 				},
@@ -120,16 +112,24 @@ const asyncRoutes = [
 		]
 	}
 ]
+
 const routes = [...staticRoutes];
-const router = new VueRouter({
+const createRouter = () => new VueRouter({
   routes
 })
-
+const router = createRouter();
+// 重置路由
+const resetRouter = () => {
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher
+}
 // 解决Vue-Router升级导致的Uncaught(in promise) navigation guard问题
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push (location, onResolve, onReject) {
   if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
   return originalPush.call(this, location).catch(err => err)
 }
-
-export default router
+export {
+	router,
+	resetRouter
+} 
