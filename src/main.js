@@ -12,7 +12,7 @@ import {
   errorMsg,
   warningMsg
 } from '@/elementui';
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 new Vue({
 	router,
 	store,

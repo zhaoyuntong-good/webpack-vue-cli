@@ -15,7 +15,7 @@
 <script>
   import { mapMutations } from 'vuex';
   import { setToken, getToken } from '@/utils/saveToLocal.js';
-  import { login } from '@/api/login.js';
+  import { login, getLocalJson } from '@/api/login.js';
   export default {
     name: 'Login',
     data(){
@@ -58,23 +58,28 @@
           path: '/'
         })
       }
+      this.getLocalJson();
     },
     methods: {
       ...mapMutations(['setAsyncRoutes', 'setHandledRoutes']),
       // 登录
       async login(){
-        // const { data } = await login({
-        //   opId: "3000",
-        //   password: "NjY2NjY2"
-        // });
-        // console.log(data)
-        import('@/router/asyncRoutes.js').then( res => {
-          this.setAsyncRoutes(res.default);
-          setToken('1234567');
-          this.$router.push({
-            path: '/'
-          })
-        })
+        const { data } = await login({
+          opId: "3000",
+          password: "NjY2NjY2"
+        });
+        console.log(data)
+        // import('@/router/asyncRoutes.js').then( res => {
+        //   this.setAsyncRoutes(res.default);
+        //   setToken('1234567');
+        //   this.$router.push({
+        //     path: '/'
+        //   })
+        // })
+      },
+      async getLocalJson() {
+        const { data } = await getLocalJson();
+        console.log(data)
       }
     }
   }

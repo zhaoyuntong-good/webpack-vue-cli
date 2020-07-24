@@ -120,7 +120,8 @@ module.exports = {
 					}
 	  		}
 	  	],
-	  	threadPool: HappyThreadPool
+	  	threadPool: HappyThreadPool,
+	  	verbose: false
 	  }),
 		new vueLoaderPlugin(),
 		new MiniCssExtractPlugin({

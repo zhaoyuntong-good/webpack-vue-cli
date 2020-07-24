@@ -6,18 +6,21 @@ import {
   closeLoading
  } from '@/elementui';
 
+let http = null;
 let selFn = null;
+let pendingArr = [];
 let selErrMsg = null;
 let selSucMsg = null;
-let pendingArr = [];
+let showStatus = null;
+let addPendingArr = null;
+let publicUrl = '/hccloud';
+let removePendingArr = null;
 
 // 收集发起的请求
-const addPendingArr = beforeUrl => {
-  pendingArr.push(beforeUrl);
-}
+addPendingArr = beforeUrl => pendingArr.push(beforeUrl);
 
 // 删除完成的请求
-const removePendingArr = response => {
+removePendingArr = response => {
   const finishUrl = response.config.baseURL + response.config.url;
   const finishParams = response.config.params ? response.config.params : response.config.data;
   const finishObj = JSON.stringify({
@@ -28,7 +31,7 @@ const removePendingArr = response => {
 }
 
 // 状态提示函数
-const showStatus = status => ({
+showStatus = status => ({
   400: '请求错误 (400)',
   401: '未授权，请重新登录 (401)',
   403: '拒绝访问 (403)',
@@ -43,7 +46,7 @@ const showStatus = status => ({
 })[status] || `连接出错${ status }`;
 
 // 创建axios实例
-let http = axios.create({
+http = axios.create({
   baseURL: process.env.NODE_ENV === 'production' ? '/' : '/',
   headers: {
     get: {
@@ -105,4 +108,7 @@ http.interceptors.response.use( response => {
   return Promise.reject('服务器错误!');
 });
 
-export default http
+export {
+  http,
+  publicUrl
+} 

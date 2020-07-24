@@ -1,7 +1,7 @@
-import http from '@/http'
+import { http, publicUrl } from '@/http'
 
 /**
- * http.get('/xxxxx', { 
+ * http.get(`${publicUrl}/xxxxx`, { 
  *   params{ 参数 }
  *   loading{ 全局loading, true开启，默认关闭 }
  *   selSucMsg{ 自定义成功提示，默认不提示 }
@@ -12,7 +12,7 @@ import http from '@/http'
  */
 
 /**
- * http.post('/xxxxxx', params { 参数 }, {
+ * http.post(`${publicUrl}/xxxxxx`, params { 参数 }, {
  *   loading{ 全局loading, true开启，默认关闭 }
  *   selSucMsg{ 自定义成功提示，默认不提示 }
  *   selErrMsg{ 自定义失败提示，默认接口返回的提示 }
@@ -22,7 +22,7 @@ import http from '@/http'
  */
 
 // get例
-const getExample = params => http.get('/xxx', { 
+const getExample = params => http.get(`${publicUrl}/xxx`, { 
   params,
   loading: true,
   selSucMsg: '自定义成功提示',
@@ -30,7 +30,7 @@ const getExample = params => http.get('/xxx', {
 });
 
 // post例
-const postExample = (params, fn) => http.post('/xxx', params, {
+const postExample = (params, fn) => http.post(`${publicUrl}/xxx`, params, {
   fn: fn,
   loading: true,
   selSucMsg: '自定义成功提示',
