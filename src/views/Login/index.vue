@@ -64,11 +64,11 @@
       ...mapMutations(['setAsyncRoutes', 'setHandledRoutes']),
       // 登录
       async login(){
-        const { data } = await login({
-          opId: "3000",
-          password: "NjY2NjY2"
-        });
-        console.log(data)
+        // const { data } = await login({
+        //   opId: "3000",
+        //   password: "NjY2NjY2"
+        // });
+        // console.log(data)
         // import('@/router/asyncRoutes.js').then( res => {
         //   this.setAsyncRoutes(res.default);
         //   setToken('1234567');

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import { router, resetRouter} from '@/router';
 import handleRoutes from '@/utils/handleRoutes.js';
+import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex)
 
@@ -9,6 +10,7 @@ export default new Vuex.Store({
   state: {
   	asyncRoutes: null,
   	redirect: null,
+    ss: '111'
   },
   mutations: {
   	setAsyncRoutes (state, asyncRoutes) {
@@ -27,5 +29,6 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-  }
+  },
+  plugins: [createPersistedState()]
 })
