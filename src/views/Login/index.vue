@@ -69,13 +69,13 @@
         //   password: "NjY2NjY2"
         // });
         // console.log(data)
-        // import('@/router/asyncRoutes.js').then( res => {
-        //   this.setAsyncRoutes(res.default);
-        //   setToken('1234567');
-        //   this.$router.push({
-        //     path: '/'
-        //   })
-        // })
+        import('@/router/asyncRoutes.js').then( res => {
+          this.setAsyncRoutes(res.default);
+          setToken('1234567');
+          this.$router.push({
+            path: '/'
+          })
+        })
       },
       async getLocalJson() {
         const { data } = await getLocalJson();
